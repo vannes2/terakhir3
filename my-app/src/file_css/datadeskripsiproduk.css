@@ -1,17 +1,18 @@
-.data-page * {
+.data-deskripsi * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
 
-.data-page body {
+.data-deskripsi body {
   background-color: #f4f4f4;
   color: #333;
 }
 
 /* Header styling */
-.data-page header {
+.data-deskripsi header {
+  width: 3600px;
   display: flex;
   align-items: center;
   background-color: #fff;
@@ -19,33 +20,33 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.data-page .logo {
+.data-deskripsi .logo {
   font-size: 24px;
   font-weight: bold;
   color: #028a56;
 }
 
-.data-page nav ul {
+.data-deskripsi nav ul {
   list-style: none;
   display: flex;
   margin-right: auto;
 }
 
-.data-page nav ul li {
+.data-deskripsi nav ul li {
   margin-right: 20px;
 }
 
-.data-page nav ul li a {
+.data-deskripsi nav ul li a {
   text-decoration: none;
   color: #333;
 }
 
 /* Tombol Profil */
-.data-page .auth-buttons {
+.data-deskripsi .auth-buttons {
   margin-left: auto;
 }
 
-.data-page .auth-buttons button {
+.data-deskripsi .auth-buttons button {
   background-color: #fff;
   color: #147a63;
   border: 2px solid #147a63;
@@ -55,41 +56,41 @@
   font-weight: bold;
 }
 
-.data-page .auth-buttons button:hover {
+.data-deskripsi .auth-buttons button:hover {
   background-color: #e3f2ed;
 }
 
 /* Main content styling */
-.data-page main {
+.data-deskripsi main {
   padding: 20px 50px;
 }
 
-.data-page main h1 {
+.data-deskripsi main h1 {
   font-size: 40px;
   font-weight: bolder;
   color: #3b3b3b;
   margin-bottom: 20px;
 }
 
-.data-page main h2 {
+.data-deskripsi main h2 {
   font-size: 40px;
   font-weight: bold;
   color: #3b3b3b;
   margin-bottom: 20px;
 }
 
-.data-page main h3 {
+.data-deskripsi main h3 {
   font-size: 20px;
   font-weight: normal;
   color: #3b3b3b;
 }
 
-.data-page .search-bar {
+.data-deskripsi .search-bar {
   display: flex;
   margin-top: 20px; /* Tambahkan margin di atas untuk memberi jarak dari tabel */
 }
 
-.data-page .search-bar .search-input {
+.data-deskripsi .search-bar .search-input {
   width: 100%; /* Lebar penuh */
   max-width: 500px; /* Maksimal lebar */
   padding: 15px; /* Padding lebih besar untuk tinggi */
@@ -98,64 +99,64 @@
   border-radius: 5px;
 }
 
-.data-page main p {
+.data-deskripsi main p {
   font-size: 18px;
   line-height: 1.6;
 }
 
-.data-page .date input {
+.data-deskripsi .date input {
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.data-page .form-container {
+.data-deskripsi .form-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.data-page .input-group {
+.data-deskripsi .input-group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   width: 75%; /* Membuat input lebih besar */
 }
 
-.data-page .input-group input,
-.data-page .input-group select {
+.data-deskripsi .input-group input,
+.data-deskripsi .input-group select {
   flex: 1 1 20%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.data-page table {
+.data-deskripsi table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
   margin-bottom: 15px;
 }
 
-.data-page table th,
-.data-page table td {
+.data-deskripsi table th,
+.data-deskripsi table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
 }
 
-.data-page table th {
+.data-deskripsi table th {
   background-color: #f4f4f4;
   font-weight: bold;
 }
 
-.data-page table tbody tr:nth-child(even) {
+.data-deskripsi table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.data-page button {
+.data-deskripsi button {
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -166,7 +167,7 @@
   margin-right: 5px;
 }
 
-.data-page .delete-button {
+.data-deskripsi .delete-button {
   margin-left: 5px;
 }
 
@@ -175,7 +176,7 @@
 }
 
 /* popup */
-.data-page .popup-overlay {
+.data-deskripsi .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -188,18 +189,18 @@
   z-index: 1000;
 }
 
-.data-page .popup-content.small-popup {
+.data-deskripsi .popup-content.small-popup {
   width: 300px;
   height: 200px;
 }
 
-.data-page .popup-text-large {
+.data-deskripsi .popup-text-large {
   font-size: 20px;
   font-weight: bold;
   margin: 20px 0;
 }
 
-.data-page .popup-content {
+.data-deskripsi .popup-content {
   background-color: #e9f5f3;
   border-radius: 15px;
   width: 400px;
@@ -207,7 +208,7 @@
   box-shadow: 0px 20px 22px rgba(0, 0, 0, 0.2);
 }
 
-.data-page .popup-header {
+.data-deskripsi .popup-header {
   background-color: #287961;
   color: white;
   padding: 10px;
@@ -217,14 +218,14 @@
   font-weight: bold;
 }
 
-.data-page .popup-button-container {
+.data-deskripsi .popup-button-container {
   display: flex;
   justify-content: space-around;
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.data-page .popup-button {
+.data-deskripsi .popup-button {
   padding: 10px 50px;
   border-radius: 15px;
   font-size: 16px;
@@ -236,21 +237,21 @@
 }
 
 /* Footer */
-.data-page footer {
+.data-deskripsi footer {
   background-color: #eaf5f2;
   line-height: 1.5;
   padding: 20px 50px;
 }
 
 /* Thicker Footer Separator Line */
-.data-page .footer-separator.full-width {
+.data-deskripsi .footer-separator.full-width {
   width: 100vw;
   margin-left: -50px;
   height: 10px;
   background-color: #147a63;
 }
 
-.data-page .footer-container {
+.data-deskripsi .footer-container {
   display: flex;
   justify-content: space-between;
   max-width: 1500px;
@@ -259,13 +260,13 @@
   gap: 20px;
 }
 
-.data-page .footer-logo img {
+.data-deskripsi .footer-logo img {
   width: 150px;
   margin-left: 75px;
   margin-top: 10px;
 }
 
-.data-page .footer-content {
+.data-deskripsi .footer-content {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
@@ -274,29 +275,29 @@
   margin-left: 75px;
 }
 
-.data-page .customer-care,
-.data-page .account,
-.data-page .social-media {
+.data-deskripsi .customer-care,
+.data-deskripsi .account,
+.data-deskripsi .social-media {
   flex: 1;
   min-width: 200px;
 }
 
-.data-page .customer-care h3,
-.data-page .account h3,
-.data-page .social-media h3 {
+.data-deskripsi .customer-care h3,
+.data-deskripsi .account h3,
+.data-deskripsi .social-media h3 {
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-.data-page .customer-care p,
-.data-page .account p,
-.data-page .social-media p {
+.data-deskripsi .customer-care p,
+.data-deskripsi .account p,
+.data-deskripsi .social-media p {
   font-size: 14px;
   margin-bottom: 8px;
 }
 
 /* Footer Bottom */
-.data-page .footer-bottom {
+.data-deskripsi .footer-bottom {
   margin-left: 75px;
   margin-top: 20px;
   font-size: 14px;
@@ -304,14 +305,14 @@
 }
 
 /* Social Media Icons */
-.data-page .social-icons {
+.data-deskripsi .social-icons {
   display: flex;
 }
 
-.data-page .social-icons a {
+.data-deskripsi .social-icons a {
   margin-right: 15px;
 }
 
-.data-page .account {
+.data-deskripsi .account {
   text-decoration: none;
 }

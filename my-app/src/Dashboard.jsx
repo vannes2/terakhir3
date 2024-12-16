@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import Header from "./components/HeaderDokter";
+// import Footer from "./components/Footer";
 import "./file_css/dashboard.css"; // Pastikan file CSS sudah tersedia
 
 const Dashboard = () => {
@@ -93,6 +95,9 @@ const Dashboard = () => {
               <Link to="/Dataproduk">DATA PRODUK</Link>
             </li>
             <li>
+              <Link to="/Datadeskripsiproduk">DATA DESKRIPSI PRODUK</Link>
+            </li>
+            <li>
               <Link to="/Datadokter">DATA DOKTER</Link>
             </li>
             <li>
@@ -172,19 +177,19 @@ const Dashboard = () => {
           </table>
         </section>
       </main>
-      
+
       {showPopup && (
-          <div className="popup-overlay">
-            <div className="popup-content">
-              <div className="popup-header">Konfirmasi Keluar</div>
-              <p>Apakah Anda yakin ingin keluar?</p>
-              <div className="popup-button-container">
-                <button onClick={handleConfirmKeluar}>Yakin</button>
-                <button onClick={handleCancelKeluar}>Batal</button>
-              </div>
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <div className="popup-header">Konfirmasi Keluar</div>
+            <p>Apakah Anda yakin ingin keluar?</p>
+            <div className="popup-button-container">
+              <button onClick={handleConfirmKeluar}>Yakin</button>
+              <button onClick={handleCancelKeluar}>Batal</button>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
       <footer className="dashboard-footer">
         <div className="footer-separator full-width"></div>

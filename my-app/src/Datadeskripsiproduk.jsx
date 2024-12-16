@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./file_css/dataproduk.css";
+import "./file_css/datadeskripsiproduk.css";
 import AdminGuard from "./AdminGuard";
 
-const DataProduk = () => {
+const Datadeskripsiproduk = () => {
   const [dataProduk, setDataProduk] = useState([]);
   const [tipeKulit, setTipeKulit] = useState([]);
   const [masalahKulit, setMasalahKulit] = useState([]);
   const [formData, setFormData] = useState({
-    gambar: "",
     id_brand: "",
     nama: "",
-    id_jenis: "",
+    deskripsi: "",
+    komposisi: "",
+    cara_pemakaian: "",
     kisaran_harga: "",
-    id_tipe_kulit: "",
-    id_masalah: "",
+    link_shopee: "",
+    link_tokopedia: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -94,24 +95,17 @@ const DataProduk = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFormData({ ...formData, gambar: reader.result });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleAdd = async () => {
     const sanitizedFormData = {
       ...formData,
+
       id_brand: parseInt(formData.id_brand, 10),
-      id_jenis: parseInt(formData.id_jenis, 10),
-      id_tipe_kulit: parseInt(formData.id_tipe_kulit, 10),
-      id_masalah: parseInt(formData.id_masalah, 10),
+      deskripsi: (formData.deskripsi, 1000),
+      komposisi: (formData.komposisi, 1000),
+      cara_pemakaian: (formData.cara_pemakaian, 1000),
+      kisaran_harga: (formData.kisaran_harga, 1000),
+      link_shopee: (formData.link_shopee, 1000),
+      link_tokopedia: (formData.link_tokopedia, 1000),
       gambar: formData.gambar || "", // tambahkan nilai kosong untuk gambar jika tidak ada
     };
 
@@ -128,11 +122,12 @@ const DataProduk = () => {
         setFormData({
           id_brand: "",
           nama: "",
-          id_jenis: "",
+          deskripsi: "",
+          komposisi: "",
+          cara_pemakaian: "",
           kisaran_harga: "",
-          id_tipe_kulit: "",
-          id_masalah: "",
-          gambar: "", // reset nilai gambar
+          link_shopee: "",
+          link_tokopedia: "",
         });
       } else {
         console.error("Error adding produk:", response.statusText);
@@ -147,11 +142,12 @@ const DataProduk = () => {
     setFormData({
       id_brand: produk.id_brand,
       nama: produk.nama_produk,
-      id_jenis: produk.id_jenis,
+      deskripsi: produk.deskripsi,
+      komposisi: produk.komposisi,
+      cara_pemakaian: produk.cara_pemakaian,
       kisaran_harga: produk.kisaran_harga,
-      id_tipe_kulit: produk.id_tipe_kulit,
-      id_masalah: produk.id_masalah,
-      gambar: produk.gambar,
+      link_shopee: produk.link_shopee,
+      link_tokopedia: produk.link_tokopedia,
     });
     setIsEditing(true);
     setEditId(id);
@@ -172,13 +168,14 @@ const DataProduk = () => {
       if (response.ok) {
         fetchDataProduk();
         setFormData({
-          gambar: "",
           id_brand: "",
           nama: "",
-          id_jenis: "",
+          deskripsi: "",
+          komposisi: "",
+          cara_pemakaian: "",
           kisaran_harga: "",
-          id_tipe_kulit: "",
-          id_masalah: "",
+          link_shopee: "",
+          link_tokopedia: "",
         });
         setIsEditing(false);
         setEditId(null);
@@ -228,21 +225,9 @@ const DataProduk = () => {
     return masalah ? masalah.nama_masalah : "";
   };
 
-  const getKategoriName = (id) => {
-    const kategori = {
-      1: "Pembersih",
-      2: "Pelembap",
-      3: "Toner",
-      4: "Serum",
-      5: "Sunscreen",
-      6: "Masker",
-    };
-    return kategori[id] || "Unknown";
-  };
-
   return (
     <AdminGuard>
-      <div className="data-page">
+      <div className="data-deskripsi">
         <header>
           <div className="logo">
             <img src="assets/images/logobesar.svg" alt="Logo Ayune" />
@@ -272,7 +257,7 @@ const DataProduk = () => {
         </header>
 
         <main>
-          <h1>Data Produk</h1>
+          <h1>Data Deskripsi Produk</h1>
 
           <div className="search-bar">
             <input
@@ -285,27 +270,11 @@ const DataProduk = () => {
           </div>
 
           <p>
-            Silakan kelola <strong>Data Produk</strong> dengan apik ya rek!
+            Silakan kelola <strong>Data Deskripsi Produk</strong> dengan apik ya
+            rek!
           </p>
           <div className="form-container">
             <div className="input-group">
-              <input
-                type="file"
-                name="gambar"
-                accept="image/*"
-                onChange={handleFileUpload}
-              />
-              {formData.gambar && (
-                <img
-                  src={formData.gambar}
-                  alt="Preview"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "cover",
-                  }}
-                />
-              )}
               <input
                 type="text"
                 name="id_brand"
@@ -320,48 +289,48 @@ const DataProduk = () => {
                 value={formData.nama}
                 onChange={handleChange}
               />
-              <select
-                name="id_jenis"
-                value={formData.id_jenis}
+              <input
+                type="text"
+                name="deskripsi"
+                placeholder="Deskripsi"
+                value={formData.deskripsi}
                 onChange={handleChange}
-              >
-                <option value="1">Pembersih</option>
-                <option value="2">Pelembap</option>
-                <option value="3">Toner</option>
-                <option value="4">Serum</option>
-                <option value="5">Sunscreen</option>
-                <option value="6">Masker</option>
-              </select>
+              />
+              <input
+                type="text"
+                name="komposisi"
+                placeholder="Komposisi"
+                value={formData.komposisi}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="cara_pemakaian"
+                placeholder="Cara Pemakaian"
+                value={formData.cara_pemakaian}
+                onChange={handleChange}
+              />
               <input
                 type="text"
                 name="kisaran_harga"
-                placeholder="Harga"
+                placeholder="Kisaran Harga"
                 value={formData.kisaran_harga}
                 onChange={handleChange}
               />
-
-              <select
-                name="id_tipe_kulit"
-                value={formData.id_tipe_kulit}
+              <input
+                type="text"
+                name="link_shopee"
+                placeholder="Link Shopee"
+                value={formData.link_shopee}
                 onChange={handleChange}
-              >
-                <option value="1">Kulit kering</option>
-                <option value="2">Kulit kombinasi</option>
-                <option value="3">Kulit normal</option>
-                <option value="4">Kulit berminyak</option>
-                <option value="5">Kulit sensitif</option>
-              </select>
-              <select
-                name="id_masalah"
-                value={formData.id_masalah}
+              />
+              <input
+                type="text"
+                name="link_tokopedia"
+                placeholder="Link Tokopedia"
+                value={formData.link_tokopedia}
                 onChange={handleChange}
-              >
-                <option value="1">Jerawat & komedo</option>
-                <option value="2">Penuan</option>
-                <option value="3">Pigmentasi</option>
-                <option value="4">Tekstur kulit</option>
-                <option value="5">Kering & sensitif</option>
-              </select>
+              />
             </div>
             <div className="auth-buttons">
               <button onClick={isEditing ? handleUpdate : handleAdd}>
@@ -373,13 +342,14 @@ const DataProduk = () => {
             <thead>
               <tr>
                 <th>No</th>
-                <th>Gambar</th>
                 <th>Nama Brand</th>
                 <th>Nama Produk</th>
-                <th>Kategori</th>
-                <th>Harga</th>
-                <th>Tipe Kulit</th>
-                <th>Masalah Kulit</th>
+                <th>Deskripsi</th>
+                <th>Komposisi</th>
+                <th>Cara Pemakaian</th>
+                <th>Kisaran Harga</th>
+                <th>Link Shopee</th>
+                <th>Link Tokopedia</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -387,23 +357,14 @@ const DataProduk = () => {
               {filteredProduk.map((produk, index) => (
                 <tr key={produk.id}>
                   <td>{index + 1}</td>
-                  <td>
-                    <img
-                      src={produk.gambar}
-                      alt={`Gambar ${produk.nama_produk}`}
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </td>
                   <td>{produk.nama_brand}</td>
                   <td>{produk.nama_produk}</td>
-                  <td>{getKategoriName(produk.id_jenis)}</td>
+                  <td>{produk.deskripsi}</td>
+                  <td>{produk.komposisi}</td>
+                  <td>{produk.cara_pemakaian}</td>
                   <td>{produk.kisaran_harga}</td>
-                  <td>{getTipeKulitName(produk.id_tipe_kulit)}</td>
-                  <td>{getMasalahKulitName(produk.id_masalah)}</td>
+                  <td>{produk.link_shopee}</td>
+                  <td>{produk.link_tokopedia}</td>
                   <td>
                     <button onClick={() => handleEdit(produk.id)}>Edit</button>
 
@@ -492,4 +453,4 @@ const DataProduk = () => {
   );
 };
 
-export default DataProduk;
+export default Datadeskripsiproduk;

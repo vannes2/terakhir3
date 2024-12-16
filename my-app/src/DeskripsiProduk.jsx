@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios"; // Pastikan axios juga diimpor jika digunakan
+import axios from "axios";
 import Header from "./components/HeaderAfterLogin";
 import Footer from "./components/Footer";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// Data ulasan
+
 const reviews = [
   {
     name: "Mirana Bella",
@@ -38,12 +38,13 @@ const reviews = [
 const DeskripsiProduk = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+
   const { id } = useParams();
   const [produk, setProduk] = useState(null);
 
   const handleModal = (action) => {
     if (action === "mengerti") {
-      navigate("/ulasanproduk");
+      navigate("/ulasan_produk");
     }
     setIsModalOpen(false);
   };
@@ -64,7 +65,7 @@ const DeskripsiProduk = () => {
   }
 
   return (
-    <div className="deskripsi-produk">
+    <div>
       {/* Header */}
       <Header />
 
@@ -127,7 +128,7 @@ const DeskripsiProduk = () => {
         </div>
       </section>
 
-      <section className="bg-[#E3F2ED] py-[21px] flex justify-center relative">
+      <section className="bg-[#E3F2ED] py-[21px] flex justify-center relative ml-[500px]">
         <div className=" px-[120px] justify-center">
           <p className="text-[#4A4A4A] text-[20px] font-bold text-center mb-[5px]">
             Ulasan
@@ -145,15 +146,15 @@ const DeskripsiProduk = () => {
         </div>
 
         <button
-          className="px-[11px] bg-[#147A63] text-white font-bold rounded-full h-[37px] w-[200px] py-[50px] text-[20px] absolute right-[120px] top-[16px]"
-          onClick={() => setIsModalOpen(true)} // Pastikan fungsi ini dipanggil
+          className="flex items-center justify-center bg-[#147A63] text-white font-bold rounded-full h-[37px] w-[200px] text-[20px] ml-[250px] mt-5"
+          onClick={() => setIsModalOpen(true)}
         >
           Berikan Ulasan
         </button>
       </section>
 
       {/* Section: Ulasan */}
-      <section className="ulas">
+      <section className="ulas bg-white">
         {/* ulasan 1 */}
         <div className="review-container">
           {reviews.map((review, index) => (
@@ -197,22 +198,60 @@ const DeskripsiProduk = () => {
         </div>
       </section>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Simpan ulasan anda dan dapatkan koin</h3>
-            <p>Pastikan ulasan Anda sesuai aturan...</p>
-            <div className="modal-actions">
-              <button onClick={() => handleModal("batal")}>Batal</button>
-              <button onClick={() => handleModal("mengerti")}>Mengerti</button>
+      <div className="profile-page">
+        {/* popup */}
+        {isModalOpen && (
+          <div className="popup-overlay">
+            <div className="popup-content-ulas">
+              <h3 className="popup-header">
+                Simpan ulasan anda dan dapatkan koin
+              </h3>
+              <div className="posisi">
+                <p>
+                  <strong>Pastikan keaslian ulasan anda</strong>
+                  <br />
+                  Pada saat menulis ulasan diharapkan user menulis berdasarkan
+                  pengalaman pribadi.
+                </p>
+                <p>
+                  <strong>Ulas sesuai dengan produk</strong>
+                  <br />
+                  Pastikan ulasan kamu relevan dan hanya berfokus pada produk
+                  yang sedang dikomentari.
+                </p>
+                <p>
+                  <strong>Sopan dan tidak SARA</strong>
+                  <br />
+                  Gunakan bahasa yang sopan dan hindari konten yang mengandung
+                  unsur SARA (Suku, Agama, Ras, dan Antargolongan).
+                </p>
+                <p>
+                  <strong>Ada ulasan yang mengganggu?</strong>
+                  <br />
+                  Bagian ini memungkinkan kamu untuk melaporkan ulasan yang
+                  mungkin tidak pantas atau melanggar aturan.
+                </p>
+              </div>
+              <div className="popup-button-container">
+                <button
+                  className="popup-button btn-cancel"
+                  onClick={() => handleModal("batal")}
+                >
+                  Batal
+                </button>
+                <button
+                  className="popup-button btn-exit"
+                  onClick={() => handleModal("mengerti")}
+                >
+                  Mengerti
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="footer-separator"></div>
-
       {/* Footer */}
       <Footer />
     </div>

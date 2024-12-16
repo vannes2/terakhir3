@@ -1,41 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
-import './file_css/ChatPage.css';
+import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
+import "./file_css/ChatPage.css";
 import Header from "./components/HeaderDokter";
 import Footer from "./components/FooterDokter";
-import FooterDokter from './components/FooterDokter';
+import FooterDokter from "./components/FooterDokter";
 
-const socket = io('http://localhost:5000'); // Hubungkan ke backend di port 5000
+const socket = io("http://localhost:5000"); // Hubungkan ke backend di port 5000
 
 const PasienKonsul = () => {
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    socket.on('message', (message) => {
-      console.log('Pesan diterima di PasienKonsul:', message); // Log diterima
+    socket.on("message", (message) => {
+      console.log("Pesan diterima di PasienKonsul:", message); // Log diterima
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
     return () => {
-      socket.off('message');
+      socket.off("message");
     };
   }, []);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (message.trim()) {
-      const msg = { sender: 'pasien', text: message };
-      console.log('Mengirim pesan dari PasienKonsul:', msg); // Log pengiriman
-      socket.emit('message', msg);
-      setMessage(''); // Kosongkan input setelah mengirim pesan
+      const msg = { sender: "pasien", text: message };
+      console.log("Mengirim pesan dari PasienKonsul:", msg); // Log pengiriman
+      socket.emit("message", msg);
+      setMessage(""); // Kosongkan input setelah mengirim pesan
     }
   };
 
   return (
     <div className="chat-page">
       {/* header */}
-      <Header /> 
+      <Header />
+
       <div className="message-list">
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender}`}>
@@ -56,7 +57,6 @@ const PasienKonsul = () => {
       <div className="footer-separator"></div>
       {/* Footer Dokter*/}
       <FooterDokter />
-      
     </div>
   );
 };

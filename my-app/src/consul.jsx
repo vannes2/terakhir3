@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import io from 'socket.io-client';
-import './file_css/consul.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import io from "socket.io-client";
+import Header from "./components/HeaderAfterLogin";
+import Footer from "./components/Footer";
+import "./file_css/consul.css";
 
-const socket = io('http://localhost:5000'); // Hubungkan ke backend di port 5000
+const socket = io("http://localhost:5000"); // Hubungkan ke backend di port 5000
 
 const Consul = () => {
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [showFirstPopup, setShowFirstPopup] = useState(false);
   const [showSecondPopup, setShowSecondPopup] = useState(false);
 
@@ -16,35 +18,34 @@ const Consul = () => {
 
   // Ambil data dokter dari state atau local storage
   const dokter =
-    location.state?.dokter || JSON.parse(localStorage.getItem('selectedDoctor'));
+    location.state?.dokter ||
+    JSON.parse(localStorage.getItem("selectedDoctor"));
 
   useEffect(() => {
     if (dokter) {
-      localStorage.setItem('selectedDoctor', JSON.stringify(dokter));
+      localStorage.setItem("selectedDoctor", JSON.stringify(dokter));
     } else {
-      navigate('/ahli'); // Jika data dokter tidak ditemukan, arahkan ke halaman Ahli
+      navigate("/ahli"); // Jika data dokter tidak ditemukan, arahkan ke halaman Ahli
     }
 
-    // Listener untuk pesan masuk
-    const handleIncomingMessage = (message) => {
+    // Konsultasi
+    socket.on("message", (message) => {
+      console.log("Pesan diterima di Consul:", message); // Log diterima
       setMessages((prevMessages) => [...prevMessages, message]);
-    };
+    });
 
-    socket.on('message', handleIncomingMessage);
-
-    // Cleanup listener
     return () => {
-      socket.off('message', handleIncomingMessage);
+      socket.off("message");
     };
-  }, [dokter, navigate]);
+  }, []);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (message.trim()) {
-      const msg = { sender: 'dokter', text: message };
-      socket.emit('message', msg); // Kirim pesan ke backend
-      setMessages((prevMessages) => [...prevMessages, msg]); // Tambahkan pesan ke state lokal
-      setMessage(''); // Reset input pesan
+      const msg = { sender: "dokter", text: message };
+      console.log("Mengirim pesan dari Consul:", msg); // Log pengiriman
+      socket.emit("message", msg);
+      setMessage("");
     }
   };
 
@@ -59,27 +60,12 @@ const Consul = () => {
 
   const handleRekomendasi = () => {
     setShowSecondPopup(false);
-    navigate('/Recom'); // Navigasikan ke halaman Recom
+    navigate("/Recom"); // Navigasikan ke halaman Recom
   };
 
   return (
     <div className="consul-page-container">
-      <header>
-        <div className="logo">
-          <img src="assets/images/logobesar.svg" alt="Logo Ayune" />
-        </div>
-        <nav>
-          <ul>
-            <li><Link to="/HomeAfterLogin">BERANDA</Link></li>
-            <li><Link to="/AboutUs_Login">TENTANG KAMI</Link></li>
-            <li><Link to="/Produk">PRODUK</Link></li>
-            <li><Link to="/Ahli">KONSULTASI</Link></li>
-          </ul>
-        </nav>
-        <div className="auth-buttons">
-          <Link to="/profil"><button>Ayyunie</button></Link>
-        </div>
-      </header>
+      <Header />
 
       <div className="header-divider">
         <span className="header-divider-text">Konsultasi</span>
@@ -87,6 +73,7 @@ const Consul = () => {
 
       <div>
         <section className="consultation">
+          {/* Box Chat */}
           <div className="chat-section">
             <div className="chat-box">
               {messages.map((msg, index) => (
@@ -105,29 +92,39 @@ const Consul = () => {
                 />
               </form>
               <div id="cam-button">
-                <button type="button"><img src="assets/images/cam.png" alt="Camera" /></button>
+                <button type="button">
+                  <img src="assets/images/cam.png" alt="Camera" />
+                </button>
               </div>
-              <button type="submit"><img src="assets/images/send.png" alt="Send" /></button>
+              <button type="submit">
+                <img src="assets/images/send.png" alt="Send" />
+              </button>
             </div>
           </div>
 
           <aside className="profile-section">
+            {/* Profil Dokter */}
             <div className="doctor-profile">
               <h1>Profil Dokter</h1>
               <img
-                src={`http://localhost/assets/images/${dokter?.gambar || 'default.png'}`}
-                alt={dokter?.nama_dokter || 'Dokter Tidak Ditemukan'}
+                src={dokter.gambar}
+                alt={dokter?.nama_dokter || "Dokter Tidak Ditemukan"}
               />
-              <h2>{dokter?.nama_dokter || 'Dokter Tidak Ditemukan'}</h2>
-              <h6>{dokter?.bidang_dokter || 'Spesialisasi Tidak Tersedia'}</h6>
+              <h2>{dokter?.nama_dokter || "Dokter Tidak Ditemukan"}</h2>
+              <h6>{dokter?.bidang_dokter || "Spesialisasi Tidak Tersedia"}</h6>
               <p>
                 {dokter
-                  ? `Beliau merupakan ${dokter.bidang_dokter} dengan pengalaman ${
-                      dokter.riwayat_dokter || 'tidak diketahui'
-                    }.` : 'Informasi dokter tidak tersedia.'}
+                  ? `Beliau merupakan seorang ahli spesialis ${
+                      dokter.bidang_dokter
+                    } dengan pengalaman ${
+                      dokter.riwayat_dokter || "tidak diketahui"
+                    }.`
+                  : "Informasi dokter tidak tersedia."}
               </p>
             </div>
             <br />
+
+            {/* Input Masalah Kulit */}
             <div className="skin-problems">
               <h1>Masalah Kulit</h1>
               <form>
@@ -154,7 +151,9 @@ const Consul = () => {
                 <label htmlFor="age">Usia:</label>
                 <input type="text" id="age" placeholder="Masukkan Usia" />
 
-                <button type="button" onClick={handleShowFirstPopup}>Rekomendasi</button>
+                <button type="button" onClick={handleShowFirstPopup}>
+                  Rekomendasi
+                </button>
               </form>
             </div>
           </aside>
@@ -165,13 +164,20 @@ const Consul = () => {
       {showFirstPopup && (
         <div className="popup-overlay-unggah">
           <div className="popup-content-unggah">
-            <div className="popup-header">Berikan ulasan Dokter lalu dapatkan koin</div>
+            <div className="popup-header">
+              Berikan ulasan Dokter lalu dapatkan koin
+            </div>
             <div className="stars" id="starRating">
-              <input type="radio" name="star" id="star1" /><label htmlFor="star1">★</label>
-              <input type="radio" name="star" id="star2" /><label htmlFor="star2">★</label>
-              <input type="radio" name="star" id="star3" /><label htmlFor="star3">★</label>
-              <input type="radio" name="star" id="star4" /><label htmlFor="star4">★</label>
-              <input type="radio" name="star" id="star5" /><label htmlFor="star5">★</label>
+              <input type="radio" name="star" id="star1" />
+              <label htmlFor="star1">★</label>
+              <input type="radio" name="star" id="star2" />
+              <label htmlFor="star2">★</label>
+              <input type="radio" name="star" id="star3" />
+              <label htmlFor="star3">★</label>
+              <input type="radio" name="star" id="star4" />
+              <label htmlFor="star4">★</label>
+              <input type="radio" name="star" id="star5" />
+              <label htmlFor="star5">★</label>
             </div>
             <div className="tulis">
               <p>Tuliskan ulasan Anda (opsional*)</p>
@@ -181,7 +187,9 @@ const Consul = () => {
               placeholder="Tambahkan ulasan tertulis jika anda ingin memberikan masukan"
             ></textarea>
             <div className="popup-button-container">
-              <button className="unggah-btn" onClick={handleUploadClick}>Unggah</button>
+              <button className="unggah-btn" onClick={handleUploadClick}>
+                Unggah
+              </button>
             </div>
           </div>
         </div>
@@ -194,10 +202,15 @@ const Consul = () => {
             <div className="popup-header">Ulasan berhasil disimpan</div>
             <p className="selamat">SELAMAT!!</p>
             <p className="koin">500 KOIN</p>
-            <button className="rekom-btn" onClick={handleRekomendasi}>Rekomendasi</button>
+            <button className="rekom-btn" onClick={handleRekomendasi}>
+              Rekomendasi
+            </button>
           </div>
         </div>
       )}
+
+      <div className="footer-separator full-width"></div>
+      <Footer />
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import Header from "./components/HeaderAfterLogin";
 import Footer from "./components/Footer";
-import './file_css/HomeAfterLogin.css';
+import "./file_css/HomeAfterLogin.css";
 
 const HomeAfterLogin = () => {
   return (
@@ -12,10 +12,11 @@ const HomeAfterLogin = () => {
 
       <section className="hero">
         <div className="hero-text">
-          <h1>Raih tujuan kulit Anda
-          bersama kami</h1>
+          <h1>Raih tujuan kulit Anda bersama kami</h1>
           <div className="buttons">
-            <Link to="/Ahli"><button>KONSULTASI</button></Link>
+            <Link to="/Ahli">
+              <button>KONSULTASI</button>
+            </Link>
           </div>
         </div>
         <div className="hero-image">
@@ -27,34 +28,81 @@ const HomeAfterLogin = () => {
         <div className="product-section">
           <h2 className="product-title">Produk Skincare yang Sedang Tren</h2>
           <div className="auth-buttons">
-            <Link to="/produk" className="btn-right"><button>Selengkapnya &gt;</button></Link>
+            <Link to="/produk" className="btn-right">
+              <button>Selengkapnya &gt;</button>
+            </Link>
           </div>
         </div>
         <div className="product-list">
           <div className="product-item">
-            <img src="assets/images/gambarheader1.png" alt="SKINTIFIC Peeling" />
-            <p><strong>SKINTIFIC</strong><br />Peeling Lactic Acid Skin Renewal Exfoliating Serum<br />Rp300.000 - Rp340.000</p>
+            <img
+              src="assets/images/gambarheader1.png"
+              alt="SKINTIFIC Peeling"
+            />
+            <p>
+              <strong>SKINTIFIC</strong>
+              <br />
+              Peeling Lactic Acid Skin Renewal Exfoliating Serum
+              <br />
+              Rp300.000 - Rp340.000
+            </p>
           </div>
           <div className="product-item">
-            <img src="assets/images/gambarheader2.png" alt="SKINTIFIC Peeling" />
-            <p><strong>SKINTIFIC</strong><br />Peeling Lactic Acid Skin Renewal Exfoliating Serum<br />Rp300.000 - Rp340.000</p>
+            <img
+              src="assets/images/gambarheader2.png"
+              alt="SKINTIFIC Peeling"
+            />
+            <p>
+              <strong>SKINTIFIC</strong>
+              <br />
+              Peeling Lactic Acid Skin Renewal Exfoliating Serum
+              <br />
+              Rp300.000 - Rp340.000
+            </p>
           </div>
           <div className="product-item">
-            <img src="assets/images/gambarheader3.png" alt="AMATERASUN Physical Sunscreen SPF 50+" />
-            <p><strong>AMATERASUN</strong><br />Physical Sunscreen SPF 50+ PA++<br />Rp85.000 - Rp99.000</p>
+            <img
+              src="assets/images/gambarheader3.png"
+              alt="AMATERASUN Physical Sunscreen SPF 50+"
+            />
+            <p>
+              <strong>AMATERASUN</strong>
+              <br />
+              Physical Sunscreen SPF 50+ PA++
+              <br />
+              Rp85.000 - Rp99.000
+            </p>
           </div>
           <div className="product-item">
-            <img src="assets/images/gambarheader4.png" alt="SOMETHINC Diamond Phyto Stem Cell Serum" />
-            <p><strong>SOMETHINC</strong><br />Diamond Phyto Stem Cell Serum<br />Rp130.000 - Rp140.000</p>
+            <img
+              src="assets/images/gambarheader4.png"
+              alt="SOMETHINC Diamond Phyto Stem Cell Serum"
+            />
+            <p>
+              <strong>SOMETHINC</strong>
+              <br />
+              Diamond Phyto Stem Cell Serum
+              <br />
+              Rp130.000 - Rp140.000
+            </p>
           </div>
           <div className="product-item">
-            <img src="assets/images/gambarheader5.png" alt="BIO-OIL Skincare Oil Natural" />
-            <p><strong>BIO-OIL</strong><br />Skincare Oil Natural<br />Rp260.000 - Rp325.000</p>
+            <img
+              src="assets/images/gambarheader5.png"
+              alt="BIO-OIL Skincare Oil Natural"
+            />
+            <p>
+              <strong>BIO-OIL</strong>
+              <br />
+              Skincare Oil Natural
+              <br />
+              Rp260.000 - Rp325.000
+            </p>
           </div>
         </div>
       </section>
 
-    <div className="footer-separator"></div>
+      <div className="footer-separator"></div>
       {/* Footer */}
       <Footer />
     </div>

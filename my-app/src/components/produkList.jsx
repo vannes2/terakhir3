@@ -54,9 +54,9 @@ const ProdukList = () => {
   }, {});
 
   return (
-    <div style={{ backgroundColor: "#FFFFFF", padding: "20px" }}>
-      <section className="bg-[#E3F2ED] py-[5px]">
-        <div className="flex gap-[89px] px-[120px]">
+    <div className="space-y-[30px] bg-white">
+      <section className="bg-[#E3F2ED] py-[5px] w-full">
+        <div className="flex gap-[89px] px-[120px] max-w-screen-xl mx-auto">
           <p className="text-[#4A4A4A] text-[40px] font-bold">PRODUK</p>
           <div className="flex gap-2 items-center bg-white px-[21px] py-[16px] w-full">
             <CiSearch className="font-bold text-3xl" />
@@ -70,6 +70,7 @@ const ProdukList = () => {
           </div>
         </div>
       </section>
+
       <br></br>
       {Object.keys(groupedProduk).length === 0 ? (
         <p>Tidak ada produk yang sesuai dengan pencarian.</p>
@@ -118,16 +119,7 @@ const ProdukList = () => {
                   </Link>
                 </div>
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "20px",
-                    justifyContent: "center",
-                    margin: "0 auto",
-                    padding: "0 10px",
-                  }}
-                >
+                <div className="grid grid-cols-4 gap-6 px-[120px] py-[51px] bg-white">
                   {groupedProduk[jenisNama].map((item) => (
                     <div
                       key={item.id}
@@ -135,32 +127,33 @@ const ProdukList = () => {
                         border: "1px solid #ccc",
                         padding: "20px",
                         borderRadius: "10px",
-                        width: "300px",
-                        margin: "10px",
                         backgroundColor: "#FFFFFF",
                       }}
                     >
-                      <Link to={`/produk/${item.id}`}>
-                        <img
-                          src={item.gambar}
-                          alt={item.nama_produk || "Produk"}
-                          style={{
-                            width: "100%",
-                            height: "200px",
-                            objectFit: "cover",
-                          }}
-                          onError={(e) => {
-                            e.target.src = "/assets/images/default.png";
-                          }}
-                        />
-                      </Link>
-                      <h4 style={{ color: "#147A63", fontWeight: "bold" }}>
-                        {item.nama_brand}
-                      </h4>
-                      <h3>{item.nama_produk || "Produk Tanpa Nama"}</h3>
-                      <p>
-                        <strong>Harga:</strong> {item.kisaran_harga}
-                      </p>
+                      <div className="flex justify-center">
+                        <Link to={`/produk/${item.id}`}>
+                          <img
+                            src={item.gambar}
+                            alt={item.nama_produk || "Produk"}
+                            style={{
+                              width: "100%",
+                              height: "180px",
+                              objectFit: "cover",
+                            }}
+                            onError={(e) => {
+                              e.target.src = "/assets/images/default.png";
+                            }}
+                          />
+                        </Link>
+                      </div>
+
+                      <div className="text-[#4A4A4A] text-[12px]">
+                        <p className="text-[#147A63] font-extrabold">
+                          {item.nama_brand}
+                        </p>
+                        <p>{item.nama_produk}</p>
+                        <p>{item.kisaran_harga}</p>
+                      </div>
                     </div>
                   ))}
                 </div>

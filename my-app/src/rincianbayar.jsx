@@ -52,7 +52,7 @@ const RincianBayar = () => {
           <div className="card">
             <div className="doctor-info">
               <img
-                src={`http://localhost/assets/images/${dokter.gambar}`}
+                src={dokter.gambar}
                 alt={dokter.nama_dokter}
                 className="doctor-photo"
               />

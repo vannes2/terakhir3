@@ -13,7 +13,7 @@ const DataUser = () => {
     jk_user: "L",
     koin: 0,
     id_tipe_kulit: 1,
-    id_masalah_kulit: 1
+    id_masalah_kulit: 1,
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -32,12 +32,12 @@ const DataUser = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/users');
+      const response = await fetch("http://localhost:5000/api/users");
       const users = await response.json();
-      console.log('Data pengguna yang diambil:', users);
+      console.log("Data pengguna yang diambil:", users);
       setDataUser(users);
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error("Error fetching users:", error);
     }
   };
 
@@ -64,13 +64,13 @@ const DataUser = () => {
 
   const handleAdd = async () => {
     try {
-      console.log('Data yang akan ditambahkan:', formData); // Logging data yang akan ditambahkan
-      const response = await fetch('http://localhost:5000/api/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      console.log("Data yang akan ditambahkan:", formData); // Logging data yang akan ditambahkan
+      const response = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-  
+
       if (response.ok) {
         fetchUsers();
         setFormData({
@@ -81,27 +81,27 @@ const DataUser = () => {
           jk_user: "Laki-laki",
           koin: 0,
           id_tipe_kulit: 1,
-          id_masalah_kulit: 1
+          id_masalah_kulit: 1,
         });
       } else {
-        console.error('Error adding user:', response.statusText);
+        console.error("Error adding user:", response.statusText);
       }
     } catch (error) {
-      console.error('Error adding user:', error);
+      console.error("Error adding user:", error);
     }
   };
-  
+
   const handleEdit = (id) => {
     const user = dataUser.find((u) => u.id === id);
     setFormData({
       nama_user: user.nama_user || "",
       email_user: user.email_user || "",
       no_hp_user: user.no_hp_user || "",
-      tgl_user: user.tgl_user ? user.tgl_user.split('T')[0] : "",
+      tgl_user: user.tgl_user ? user.tgl_user.split("T")[0] : "",
       jk_user: user.jk_user || "L",
       koin: user.koin || 0,
       id_tipe_kulit: user.id_tipe_kulit || 1,
-      id_masalah_kulit: user.id_masalah_kulit || 1
+      id_masalah_kulit: user.id_masalah_kulit || 1,
     });
     setIsEditing(true);
     setEditId(id);
@@ -109,10 +109,10 @@ const DataUser = () => {
 
   const handleUpdate = async () => {
     try {
-      console.log('Data yang akan diupdate:', formData);
+      console.log("Data yang akan diupdate:", formData);
       await fetch(`http://localhost:5000/api/users/${editId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       fetchUsers();
@@ -124,39 +124,40 @@ const DataUser = () => {
         jk_user: "L",
         koin: 0,
         id_tipe_kulit: 1,
-        id_masalah_kulit: 1
+        id_masalah_kulit: 1,
       });
       setIsEditing(false);
       setEditId(null);
     } catch (error) {
-      console.error('Error updating user:', error);
+      console.error("Error updating user:", error);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      console.log('ID yang akan dihapus:', id); // Logging ID yang akan dihapus
+      console.log("ID yang akan dihapus:", id); // Logging ID yang akan dihapus
       const response = await fetch(`http://localhost:5000/api/users/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
-  
+
       if (response.ok) {
         fetchUsers();
       } else {
-        console.error('Error deleting user:', response.statusText);
+        console.error("Error deleting user:", response.statusText);
       }
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error("Error deleting user:", error);
     }
   };
-  
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredUser = dataUser.filter((user) =>
-    user.nama_user && user.nama_user.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUser = dataUser.filter(
+    (user) =>
+      user.nama_user &&
+      user.nama_user.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -173,6 +174,9 @@ const DataUser = () => {
               </li>
               <li>
                 <Link to="/Dataproduk">DATA PRODUK</Link>
+              </li>
+              <li>
+                <Link to="/Datadeskripsiproduk">DATA DESKRIPSI PRODUK</Link>
               </li>
               <li>
                 <Link to="/Datadokter">DATA DOKTER</Link>
@@ -234,15 +238,14 @@ const DataUser = () => {
                 onChange={handleChange}
               />
 
-                <select
-                  name="jk_user"
-                  value={formData.jk_user}
-                  onChange={handleChange}
-                >
-                  <option value="L">Laki-laki</option>
-                  <option value="P">Perempuan</option>
-                </select>
-
+              <select
+                name="jk_user"
+                value={formData.jk_user}
+                onChange={handleChange}
+              >
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+              </select>
 
               <input
                 type="number"
@@ -251,30 +254,29 @@ const DataUser = () => {
                 value={formData.koin}
                 onChange={handleChange}
               />
-              
-              <select
-              name="id_tipe_kulit"
-              value={formData.id_tipe_kulit}
-              onChange={handleChange}
-            >
-              <option value="1">Kulit kering</option>
-              <option value="2">Kulit kombinasi</option>
-              <option value="3">Kulit normal</option>
-              <option value="4">Kulit berminyak</option>
-              <option value="5">Kulit sensitif</option>
-            </select>
-            <select
-              name="id_masalah_kulit"
-              value={formData.id_masalah}
-              onChange={handleChange}
-            >
-              <option value="1">Jerawat & komedo</option>
-              <option value="2">Penuan</option>
-              <option value="3">Pigmentasi</option>
-              <option value="4">Tekstur kulit</option>
-              <option value="5">Kering & sensitif</option>
-            </select>
 
+              <select
+                name="id_tipe_kulit"
+                value={formData.id_tipe_kulit}
+                onChange={handleChange}
+              >
+                <option value="1">Kulit kering</option>
+                <option value="2">Kulit kombinasi</option>
+                <option value="3">Kulit normal</option>
+                <option value="4">Kulit berminyak</option>
+                <option value="5">Kulit sensitif</option>
+              </select>
+              <select
+                name="id_masalah_kulit"
+                value={formData.id_masalah}
+                onChange={handleChange}
+              >
+                <option value="1">Jerawat & komedo</option>
+                <option value="2">Penuan</option>
+                <option value="3">Pigmentasi</option>
+                <option value="4">Tekstur kulit</option>
+                <option value="5">Kering & sensitif</option>
+              </select>
             </div>
             <div className="auth-buttons">
               <button onClick={isEditing ? handleUpdate : handleAdd}>
@@ -306,13 +308,18 @@ const DataUser = () => {
                   <td>{user.email_user}</td>
                   <td>{user.no_hp_user}</td>
                   <td>{user.tgl_user}</td>
-                  <td>{user.jk_user === 'L' ? 'Laki-laki' : 'Perempuan'}</td>
+                  <td>{user.jk_user === "L" ? "Laki-laki" : "Perempuan"}</td>
                   <td>{user.koin}</td>
                   <td>{user.nama_tipe_kulit}</td>
                   <td>{user.nama_masalah_kulit}</td>
                   <td>
                     <button onClick={() => handleEdit(user.id)}>Edit</button>
-                    <button className="delete-button" onClick={() => handleDelete(user.id)}>Delete</button>
+                    <button
+                      className="delete-button"
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -392,4 +399,3 @@ const DataUser = () => {
 };
 
 export default DataUser;
-

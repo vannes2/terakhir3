@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import Header from "./components/HeaderBeforeLogin";
 import Footer from "./components/Footer";
-import './file_css/forgotpass.css';
+import "./file_css/forgotpass.css";
 
 const forgotpass = () => {
   return (
@@ -16,13 +16,20 @@ const forgotpass = () => {
         </div>
         <div className="container">
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Masukkan email Anda" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Masukkan email Anda"
+          />
         </div>
         <br />
-        <Link to="/resetpass" className="btn">Kirim</Link>
+        <Link to="/resetpass" className="btn">
+          Kirim
+        </Link>
       </section>
 
-    <div className="footer-separator"></div>
+      <div className="footer-separator"></div>
       {/* Footer */}
       <Footer />
     </div>

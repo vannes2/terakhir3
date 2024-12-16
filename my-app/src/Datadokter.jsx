@@ -13,7 +13,7 @@ const Datadokter = () => {
     jadwal: "",
     harga_dokter: "",
     is_available: 1,
-    rating: 0
+    rating: 0,
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -32,15 +32,15 @@ const Datadokter = () => {
 
   const fetchDataDokter = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/dokters');
+      const response = await fetch("http://localhost:5000/api/dokters");
       if (response.ok) {
         const dokters = await response.json();
         setDataDokter(dokters);
       } else {
-        console.error('Failed to fetch dokters:', response.statusText);
+        console.error("Failed to fetch dokters:", response.statusText);
       }
     } catch (error) {
-      console.error('Error fetching dokters:', error);
+      console.error("Error fetching dokters:", error);
     }
   };
 
@@ -75,9 +75,9 @@ const Datadokter = () => {
 
   const handleAdd = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/dokters', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:5000/api/dokters", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -91,13 +91,13 @@ const Datadokter = () => {
           jadwal: "",
           harga_dokter: "",
           is_available: 1,
-          rating: 0
+          rating: 0,
         });
       } else {
-        console.error('Error adding dokter:', response.statusText);
+        console.error("Error adding dokter:", response.statusText);
       }
     } catch (error) {
-      console.error('Error adding dokter:', error);
+      console.error("Error adding dokter:", error);
     }
   };
 
@@ -110,11 +110,14 @@ const Datadokter = () => {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/dokters/${editId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/dokters/${editId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         fetchDataDokter();
@@ -126,31 +129,31 @@ const Datadokter = () => {
           jadwal: "",
           harga_dokter: "",
           is_available: 1,
-          rating: 0
+          rating: 0,
         });
         setIsEditing(false);
         setEditId(null);
       } else {
-        console.error('Error updating dokter:', response.statusText);
+        console.error("Error updating dokter:", response.statusText);
       }
     } catch (error) {
-      console.error('Error updating dokter:', error);
+      console.error("Error updating dokter:", error);
     }
   };
 
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/api/dokters/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (response.ok) {
         fetchDataDokter();
       } else {
-        console.error('Error deleting dokter:', response.statusText);
+        console.error("Error deleting dokter:", response.statusText);
       }
     } catch (error) {
-      console.error('Error deleting dokter:', error);
+      console.error("Error deleting dokter:", error);
     }
   };
 
@@ -178,6 +181,9 @@ const Datadokter = () => {
                 <Link to="/Dataproduk">DATA PRODUK</Link>
               </li>
               <li>
+                <Link to="/Datadeskripsiproduk">DATA DESKRIPSI PRODUK</Link>
+              </li>
+              <li>
                 <Link to="/Datadokter">DATA DOKTER</Link>
               </li>
               <li>
@@ -203,8 +209,10 @@ const Datadokter = () => {
             />
           </div>
 
-          <p>Silakan kelola <strong>Data Dokter</strong> dengan apik ya rek!</p>
-          
+          <p>
+            Silakan kelola <strong>Data Dokter</strong> dengan apik ya rek!
+          </p>
+
           <div className="form-container">
             <div className="input-group">
               <input
@@ -236,15 +244,33 @@ const Datadokter = () => {
                 value={formData.bidang_dokter}
                 onChange={handleChange}
               >
-                <option value="Spesialis Anti-aging">Spesialis Anti-aging</option>
-                <option value="Spesialis Dermatovenereologi Estetika">Spesialis Dermatovenereologi Estetika</option>
-                <option value="Spesialis Kulit & Kelamin">Spesialis Kulit & Kelamin</option>
-                <option value="Spesialis Kulit Kusam, Pigmentasi">Spesialis Kulit Kusam, Pigmentasi</option>
-                <option value="Spesialis Kulit Sensitif, Alergi">Spesialis Kulit Sensitif, Alergi</option>
-                <option value="Spesialis Kulit Ibu Hamil, Stretch Mark">Spesialis Kulit Ibu Hamil, Stretch Mark</option>
-                <option value="Spesialis jerawat, Bekas Jerawat">Spesialis jerawat, Bekas Jerawat</option>
-                <option value="Spesialis Keloid, Bekas Luka">Spesialis Keloid, Bekas Luka</option>
-                <option value="Spesialis Kulit Kusam & Penuaan Dini">Spesialis Kulit Kusam & Penuaan Dini</option>
+                <option value="Spesialis Anti-aging">
+                  Spesialis Anti-aging
+                </option>
+                <option value="Spesialis Dermatovenereologi Estetika">
+                  Spesialis Dermatovenereologi Estetika
+                </option>
+                <option value="Spesialis Kulit & Kelamin">
+                  Spesialis Kulit & Kelamin
+                </option>
+                <option value="Spesialis Kulit Kusam, Pigmentasi">
+                  Spesialis Kulit Kusam, Pigmentasi
+                </option>
+                <option value="Spesialis Kulit Sensitif, Alergi">
+                  Spesialis Kulit Sensitif, Alergi
+                </option>
+                <option value="Spesialis Kulit Ibu Hamil, Stretch Mark">
+                  Spesialis Kulit Ibu Hamil, Stretch Mark
+                </option>
+                <option value="Spesialis jerawat, Bekas Jerawat">
+                  Spesialis jerawat, Bekas Jerawat
+                </option>
+                <option value="Spesialis Keloid, Bekas Luka">
+                  Spesialis Keloid, Bekas Luka
+                </option>
+                <option value="Spesialis Kulit Kusam & Penuaan Dini">
+                  Spesialis Kulit Kusam & Penuaan Dini
+                </option>
               </select>
               <input
                 type="text"
@@ -272,7 +298,7 @@ const Datadokter = () => {
                 value={formData.is_available}
                 onChange={handleChange}
               >
-                             <option value={1}>Aktif</option>
+                <option value={1}>Aktif</option>
                 <option value={0}>Tidak Aktif</option>
               </select>
               <input
