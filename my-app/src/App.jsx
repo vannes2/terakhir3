@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./file_css/Index.css"; // Pastikan path file CSS benar
 import Signup from "./signup.jsx";
 import AboutUs from "./AboutUs.jsx";
 import HomeAfterLogin from "./HomeAfterLogin.jsx";
