@@ -1,32 +1,40 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './file_css/Index.css'; // Pastikan untuk mengimpor file CSS jika diperlukan
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./file_css/signup.css"; // Pastikan untuk mengimpor file CSS jika diperlukan
 
 const Signup = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [gender, setGender] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [gender, setGender] = useState("");
+  const [birthdate, setBirthdate] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:5000/api/signup', {
-      method: 'POST',
+    const response = await fetch("http://localhost:5000/api/signup", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, email, phone, password, confirmPassword, gender, birthdate }),
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        password,
+        confirmPassword,
+        gender,
+        birthdate,
+      }),
     });
 
     const result = await response.json();
     if (response.ok) {
-      alert('Pendaftaran berhasil');
-      navigate('/HomeAfterLogin');
+      alert("Pendaftaran berhasil");
+      navigate("/HomeAfterLogin");
     } else {
       alert(result.message);
     }
@@ -40,14 +48,24 @@ const Signup = () => {
         </div>
         <nav>
           <ul>
-            <li><Link to="/">BERANDA</Link></li>
-            <li><Link to="/AboutUs">TENTANG KAMI</Link></li>
-            <li><Link to="#">PRODUK</Link></li>
-            <li><Link to="#">KONSULTASI</Link></li>
+            <li>
+              <Link to="/">BERANDA</Link>
+            </li>
+            <li>
+              <Link to="/AboutUs">TENTANG KAMI</Link>
+            </li>
+            <li>
+              <Link to="#">PRODUK</Link>
+            </li>
+            <li>
+              <Link to="#">KONSULTASI</Link>
+            </li>
           </ul>
         </nav>
         <div className="auth-buttons">
-          <Link to="/Login"><button>Masuk</button></Link>
+          <Link to="/Login">
+            <button>Masuk</button>
+          </Link>
         </div>
       </header>
 
@@ -149,11 +167,15 @@ const Signup = () => {
             <div className="checkbox-label">
               <input type="checkbox" id="terms" name="terms" required />
               <label htmlFor="terms" className="terms">
-                Dengan mendaftar ke Ayune, Anda telah menyetujui <a href="#">syarat &amp; ketentuan</a> dan <a href="#">kebijakan privasi</a>
+                Dengan mendaftar ke Ayune, Anda telah menyetujui{" "}
+                <a href="#">syarat &amp; ketentuan</a> dan{" "}
+                <a href="#">kebijakan privasi</a>
               </label>
             </div>
             <br />
-            <button type="submit" className="btn">Mendaftar</button>
+            <button type="submit" className="btn">
+              Mendaftar
+            </button>
           </form>
         </div>
       </section>
@@ -172,23 +194,37 @@ const Signup = () => {
               <p>Instagram: @ayunneconsultation</p>
               <p>Email: ayunneconsultation@gmail.com</p>
               <p>
-                <strong>Jam operasional:</strong><br />
-                Senin-Jumat: 10:00 - 21:00 WIB<br />
+                <strong>Jam operasional:</strong>
+                <br />
+                Senin-Jumat: 10:00 - 21:00 WIB
+                <br />
                 Sabtu: 10:00 - 17:00 WIB
               </p>
             </div>
             <div className="account">
               <h3>Akun Saya</h3>
-              <p><Link to="#">Profil</Link></p>
-              <p><Link to="/signup">Daftar</Link></p>
-              <p><Link to="/Login">Masuk</Link></p>
+              <p>
+                <Link to="#">Profil</Link>
+              </p>
+              <p>
+                <Link to="/signup">Daftar</Link>
+              </p>
+              <p>
+                <Link to="/Login">Masuk</Link>
+              </p>
             </div>
             <div className="social-media">
               <h3>Ikuti Kami:</h3>
               <div className="social-icons">
-                <a href="#"><img src="assets/images/instagram.png" alt="Instagram" /></a>
-                <a href="#"><img src="assets/images/twt.png" alt="Twitter" /></a>
-                <a href="#"><img src="assets/images/yt.png" alt="YouTube" /></a>
+                <a href="#">
+                  <img src="assets/images/instagram.png" alt="Instagram" />
+                </a>
+                <a href="#">
+                  <img src="assets/images/twt.png" alt="Twitter" />
+                </a>
+                <a href="#">
+                  <img src="assets/images/yt.png" alt="YouTube" />
+                </a>
               </div>
             </div>
           </div>
