@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import "./file_css/index.css";
 import Signup from "./signup.jsx";
 import AboutUs from "./AboutUs.jsx";
 import HomeAfterLogin from "./HomeAfterLogin.jsx";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./file_css/signup.css"; // Pastikan untuk mengimpor file CSS jika diperlukan
+import "./file_css/index.css"; // Pastikan untuk mengimpor file CSS jika diperlukan
 
 const Signup = () => {
   const [name, setName] = useState("");
